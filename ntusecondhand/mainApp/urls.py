@@ -5,7 +5,7 @@ from mainApp import views
 app_name = 'mainApp'
 
 urlpatterns = [
-    url(r'^register/$', views.register, name='register'),
-    url(r'^user_login/$', views.user_login, name='user_login'),
+    url(r'^register/$', views.RegisterView.as_view(), name='register'),
+    url(r'^user_login/$', views.UserLoginView.as_view(), name='user_login'),
 ]
 

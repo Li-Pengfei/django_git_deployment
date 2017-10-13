@@ -5,18 +5,23 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+from django.views.generic import View, TemplateView
 
 
-# Create your views here.
-def index(request):
-    return render(request, 'mainApp/index.html')
+# CBV : Class Based Views
+class IndexView(TemplateView):
+    template_name = 'mainApp/index.html'
+
+    def get_context_data(self, **kwargs):
+        pass
 
 
-def register(request):
+class RegisterView(View):
 
-    registered = False
-
-    if request.method == 'POST':
+    def post(self, request, *args, **kwargs):
+        registered = False
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileInfoForm(data=request.POST)
 
@@ -33,35 +38,37 @@ def register(request):
                 profile.profile_pic = request.FILES['profile_pic']
 
             profile.save()
-
             registered = True
-
+            return render(request, 'mainApp/registration.html', context={
+                'user_form': user_form, 'profile_form': profile_form, 'registered': registered,
+            })
         else:
             print(user_form.errors, profile_form.errors)
+            user_form = UserForm()
+            profile_form = UserProfileInfoForm()
+            return render(request, 'mainApp/registration.html', context={
+                'user_form': user_form, 'profile_form': profile_form, 'registered': registered,
+            })
 
-    else:
+    def get(self, request, *args, **kwargs):
+        registered = False
         user_form = UserForm()
         profile_form = UserProfileInfoForm()
-
-    return render(request, 'mainApp/registration.html', context={
-        'user_form': user_form, 'profile_form': profile_form, 'registered': registered,
-    })
-
-
-@login_required
-def special(request):
-    return HttpResponse("You are logged in, Nice!")
+        return render(request, 'mainApp/registration.html', context={
+            'user_form': user_form, 'profile_form': profile_form, 'registered': registered,
+        })
 
 
-@login_required
-def user_logout(request):
-    logout(request)
-    return HttpResponseRedirect(reverse('index'))
+class UserLogoutView(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect(reverse('index'))
 
 
-def user_login(request):
+class UserLoginView(View):
 
-    if request.method == 'POST':
+    def post(self, request, *args, **kwargs):
 
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -78,5 +85,6 @@ def user_login(request):
             print("Username: {} and password {}".format(username, password))
             return HttpResponse('invalid login details supplied')
 
-    else:
+    def get(self, request, *args, **kwargs):
         return render(request, 'mainApp/login.html', {})
+
