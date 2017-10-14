@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^make_offer/$', views.MakeOfferView.as_view(), name='make_offer'),
     url(r'^manage_my_items/$', views.ManageMyItemView.as_view(), name='manage_my_items'),
     url(r'^addItem/$', views.AddItemView.as_view(), name='addItem'),
+    url(r'^matched_items/$', views.MatchedItemView.as_view(), name='matched_item'),
 ]
 
