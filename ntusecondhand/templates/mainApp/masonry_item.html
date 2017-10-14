@@ -18,10 +18,10 @@
         {% if user_item.user == user %}
             <div class="row">
                 <div class="col-6">
-                    <button type="button" class="btn btn-primary btn-success btn-lg btn-block ">Edit</button>
+                    <button type="button" class="btn btn-success btn-block ">Edit</button>
                 </div>
                 <div class="col-6">
-                    <button type="button" class="btn btn-primary btn-danger btn-lg btn-block">Delete</button>
+                    <button type="button" class="btn btn-danger btn-block">Delete</button>
                 </div>
             </div>
             <div class="row" style="margin-top: 0.5rem;">
@@ -30,14 +30,18 @@
                         {% csrf_token %}
                         <input type="hidden" name="user" value="{{ user.username }}">
                         <input type="hidden" name="price" value="{{ user_item.estimate_price }}">
-                        <button type="submit" class="btn btn-primary btn-info btn-lg  btn-block">Matched Items</button>
+                        <button type="submit" class="btn btn-info btn-block">Matched Items</button>
                     </form>
                 </div>
             </div>
         {% else %}
             <div class="row">
                 <div class="col">
-                    <button type="button" class="btn btn-primary btn-info btn-lg btn-block">Make An Offer</button>
+                    <form action="{% url 'mainApp:make_offer' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="item" value={{user_item.id}}>
+                        <button type="submit" class="btn btn-info btn-block">Make An Offer</button>
+                    </form>
                 </div>
             </div>
         {% endif %}

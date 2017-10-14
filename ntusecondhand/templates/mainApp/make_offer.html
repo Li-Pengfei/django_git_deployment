@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% extends 'mainApp/base_pure.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+    <div class="container">
+        <button type="button" class="btn btn-outline-info btn-block" onclick="window.history.back()" style="margin-top: 1rem;">
+            Back
+        </button>
+        <p> {{item.id}} </p>
+    </div>
+
+{% endblock %}

@@ -44,3 +44,24 @@ class ItemModel(models.Model):
 
     def category_verbose(self):
         return dict(ItemModel.CAT_CHOICES)[self.category]
+
+
+class Offer(models.Model):
+
+    TYPE_CHOICES = [
+        ('CS', 'Cash'),
+        ('EX', 'Exchange'),
+    ]
+
+    STAT_CHOICES = [
+        ('ON', 'Active'),
+        ('FI', 'Finished'),
+        ('CA', 'Canceled'),
+    ]
+
+    initiator = models.ForeignKey(ItemModel, related_name='offered', blank=True)
+    receiver = models.ForeignKey(ItemModel, related_name='wanted')
+
+    offer_type = models.CharField(max_length=3, choices=TYPE_CHOICES)
+    offer_status = models.CharField(max_length=3, choices=STAT_CHOICES)
+
