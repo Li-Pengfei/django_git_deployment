@@ -15,6 +15,15 @@ from django.views.generic import View, TemplateView
 class IndexView(TemplateView):
     template_name = 'mainApp/index.html'
 
+    def post(self, request, *args, **kwargs):
+
+        username = request.POST.get('name')
+        price = request.POST.get('price')
+
+        all_item_list = ItemModel.objects.exclude(user=username).filter(estimate_price__gte=)
+
+        return HttpResponseRedirect('mainApp/')
+
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
 

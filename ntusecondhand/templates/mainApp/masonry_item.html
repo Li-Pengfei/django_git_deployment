@@ -26,7 +26,12 @@
             </div>
             <div class="row" style="margin-top: 0.5rem;">
                 <div class="col">
-                    <button type="button" class="btn btn-primary btn-info btn-lg  btn-block">Matched Items</button>
+                    <form action="{% url 'index' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="user" value="{{ user.username }}">
+                        <input type="hidden" name="price" value="{{ user_item.estimate_price }}">
+                        <button type="submit" class="btn btn-primary btn-info btn-lg  btn-block">Matched Items</button>
+                    </form>
                 </div>
             </div>
         {% else %}
