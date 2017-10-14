@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import View, TemplateView
 
 from mainApp.forms import UserForm, UserProfileInfoForm, AddItemModelForm
-from mainApp.models import ItemModel, UserProfileInfo
+from mainApp.models import ItemModel, UserProfileInfo, Offer
 
 
 # CBV : Class Based Views
@@ -200,6 +200,24 @@ class MakeOfferView(View):
             return render(request, 'mainApp/make_offer.html', {"item": item, "all_item_list": all_item_list})
         else:
             return HttpResponse('invalid item id')
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse('this url does not accept GET request')
+
+
+class AddOfferView(View):
+    def post(self, request, *args, **kwargs):
+
+        target_item = ItemModel.objects.get(pk=request.POST.get('target_item'))
+        offer_type = request.POST.get('offer_type')
+        offer_item = None
+        offer_status = 'ON'
+        if offer_type == 'EX':
+            offer_item = ItemModel.objects.get(pk=request.POST.get('offer_item'))
+            Offer.objects.create(initiator=offer_item, receiver=target_item, offer_type=offer_type, offer_status=offer_status)
+        else:
+            Offer.objects.create(receiver=target_item, offer_type=offer_type, offer_status=offer_status)
+        return HttpResponseRedirect(reverse('index'))
 
     def get(self, request, *args, **kwargs):
         return HttpResponse('this url does not accept GET request')

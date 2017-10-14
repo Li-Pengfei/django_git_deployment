@@ -18,10 +18,10 @@ $(document).ready(function () {
 
     $('input[type=radio][name=offer_type]').change(function() {
         if (this.value == 'CS') {
-
+            $('#offer_items').attr('disabled', true);
         }
         else if (this.value == 'EX') {
-
+            $('#offer_items').attr('disabled', false);
         }
     });
 

@@ -59,7 +59,7 @@ class Offer(models.Model):
         ('CA', 'Canceled'),
     ]
 
-    initiator = models.ForeignKey(ItemModel, related_name='offered', blank=True)
+    initiator = models.ForeignKey(ItemModel, related_name='offered', blank=True, null=True)
     receiver = models.ForeignKey(ItemModel, related_name='wanted')
 
     offer_type = models.CharField(max_length=3, choices=TYPE_CHOICES)

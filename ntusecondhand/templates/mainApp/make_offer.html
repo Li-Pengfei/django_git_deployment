@@ -14,8 +14,9 @@
     </h3>
 
     {% if user.is_authenticated %}
-    <form style="margin-top: 1rem;">
+    <form style="margin-top: 1rem;" action="{% url 'mainApp:add_offer' %}" method="post">
         {% csrf_token %}
+        <input hidden name="target_item" value={{item.id}}>
         <div class="form-check">
             <label class="form-check-label">
                 <input class="form-check-input" type="radio" name="offer_type" id="radio_pay_cash" value="CS" checked>
@@ -28,12 +29,17 @@
                 Use one of your items to exchange:
             </label>
         </div>
-        <select class="form-control">
+        <select class="form-control" id="offer_items" name="offer_item" disabled>
             <option selected>Select Your Item</option>
             {% for user_item in all_item_list %}
             <option value={{user_item.id}}>{{user_item.title}}</option>
             {% endfor %}
         </select>
+
+        <button type="submit" class="btn btn-outline-success btn-block"
+                style="margin-top: 1rem; margin-bottom: 1rem;">
+            Submit
+        </button>
     </form>
     {% else %}
     <p> Please login to make an offer!</p>
