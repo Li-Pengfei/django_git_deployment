@@ -136,6 +136,20 @@ class UserLoginView(View):
         return render(request, 'mainApp/login.html', {})
 
 
+class MakeOfferView(View):
+    def post(self, request, *args, **kwargs):
+
+        item = ItemModel.objects.get(pk=request.POST.get('item'))
+
+        if item:
+            return render(request, 'mainApp/make_offer.html', {"item": item})
+        else:
+            return HttpResponse('invalid item id')
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse('this url does not accept GET request')
+
+
 class ManageMyItemView(TemplateView):
     template_name = 'mainApp/index.html'
 
