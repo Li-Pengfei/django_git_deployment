@@ -1,14 +1,13 @@
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views.generic import View, TemplateView
+
 from mainApp.forms import UserForm, UserProfileInfoForm, AddItemModelForm
 from mainApp.models import ItemModel, UserProfileInfo
-
-from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-
-from django.views.generic import View, TemplateView
 
 
 # CBV : Class Based Views
@@ -20,7 +19,9 @@ class IndexView(TemplateView):
         username = request.POST.get('name')
         price = request.POST.get('price')
 
-        all_item_list = ItemModel.objects.exclude(user=username).filter(estimate_price__gte=)
+        all_item_list = ItemModel.objects.exclude(user=username) \
+            .filter(estimate_price__gte=float(price) * 0.8) \
+            .filter(estimate_price__lte=float(price) * 1.2)
 
         return HttpResponseRedirect('mainApp/')
 
@@ -29,12 +30,12 @@ class IndexView(TemplateView):
 
         all_item_list = ItemModel.objects.all()
         electronic_item_list = []
-        fashion_item_list =[]
+        fashion_item_list = []
         home_item_list = []
         health_item_list = []
         baby_item_list = []
         sports_item_list = []
-        grocery_item_list =[]
+        grocery_item_list = []
         others_item_list = []
 
         for item in all_item_list:
@@ -74,7 +75,6 @@ class IndexView(TemplateView):
 
 
 class RegisterView(View):
-
     def post(self, request, *args, **kwargs):
         registered = False
         user_form = UserForm(data=request.POST)
@@ -214,7 +214,6 @@ class ManageMyItemView(TemplateView):
 
 
 class AddItemView(View):
-
     def post(self, request, *args, **kwargs):
         added = False
         item_form = AddItemModelForm(data=request.POST)
