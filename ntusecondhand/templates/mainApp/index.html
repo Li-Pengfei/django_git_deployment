@@ -13,14 +13,7 @@
     <!-- Our Work Section -->
     <div id="work" class="page">
         <div>
-            <!-- Title Page -->
-            <!--<div class="title-page">-->
-                <!--<h2 class="title">ALL ITEM LIST</h2>-->
-            <!--</div>-->
-            <!-- End Title Page -->
-
             <!-- Portfolio Projects -->
-
             <div class="row" style="margin: 2rem">
                 <div class="col-3">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
@@ -39,85 +32,52 @@
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade active show masonry-container" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab" aria-expanded="true">
                             {% for user_item in all_item_list %}
-                                <div class="masonry-item">
-                                    <img class="item_img_thumb" src="{{ user_item.item_pic }}" alt="{{ user_item.item_pic }}">
-                                    <p>{{ user_item.title }}</p>
-                                    <p><img src="{% static 'img/price_icon.png' %}" alt="Price Icon"> :
-                                        S$ {{ user_item.estimate_price }}</p>
-                                    {% if user_item.wechat %}
-                                        <p><img src="{% static 'img/wechat_icon.jpg' %}" alt="Wechat Icon"> : {{ user_item.wechat }}
-                                        </p>
-                                    {% endif %}
-                                </div>
+                                {% include 'mainapp/masonry_item.html' %}
                             {% endfor %}
                         </div>
                         <div class="tab-pane fade masonry-container" id="v-pills-electronics" role="tabpanel" aria-labelledby="v-pills-electronics-tab" aria-expanded="false">
+                            {% for user_item in elec_item_list %}
+                                {% include 'mainapp/masonry_item.html' %}
+                            {% endfor %}
                         </div>
                         <div class="tab-pane fade masonry-container" id="v-pills-fashion" role="tabpanel" aria-labelledby="v-pills-fashion-tab" aria-expanded="false">
+                            {% for user_item in fash_item_list %}
+                                {% include 'mainapp/masonry_item.html' %}
+                            {% endfor %}
                         </div>
                         <div class="tab-pane fade masonry-container" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" aria-expanded="false">
+                            {% for user_item in home_item_list %}
+                                {% include 'mainapp/masonry_item.html' %}
+                            {% endfor %}
                         </div>
                         <div class="tab-pane fade masonry-container" id="v-pills-health" role="tabpanel" aria-labelledby="v-pills-health-tab" aria-expanded="false">
+                            {% for user_item in heal_item_list %}
+                                {% include 'mainapp/masonry_item.html' %}
+                            {% endfor %}
                         </div>
                         <div class="tab-pane fade masonry-container" id="v-pills-baby" role="tabpanel" aria-labelledby="v-pills-baby-tab" aria-expanded="false">
+                            {% for user_item in baby_item_list %}
+                                {% include 'mainapp/masonry_item.html' %}
+                            {% endfor %}
                         </div>
                         <div class="tab-pane fade masonry-container" id="v-pills-sports" role="tabpanel" aria-labelledby="v-pills-sports-tab" aria-expanded="false">
+                            {% for user_item in spor_item_list %}
+                                {% include 'mainapp/masonry_item.html' %}
+                            {% endfor %}
                         </div>
                         <div class="tab-pane fade masonry-container" id="v-pills-grocery" role="tabpanel" aria-labelledby="v-pills-grocery-tab" aria-expanded="false">
+                            {% for user_item in groc_item_list %}
+                                {% include 'mainapp/masonry_item.html' %}
+                            {% endfor %}
                         </div>
                         <div class="tab-pane fade masonry-container" id="v-pills-others" role="tabpanel" aria-labelledby="v-pills-others-tab" aria-expanded="false">
+                            {% for user_item in othe_item_list %}
+                                {% include 'mainapp/masonry_item.html' %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!--<div class="cat-list">-->
-                <!--&lt;!&ndash; Filter &ndash;&gt;-->
-                <!--<nav id="filter-nav" class="work-nav">-->
-                    <!--<ul class="nav flex-column">-->
-                        <!--&lt;!&ndash;<li class="nav-item">&ndash;&gt;-->
-                            <!--&lt;!&ndash;<a class="nav-link" href="#">Active</a>&ndash;&gt;-->
-                        <!--&lt;!&ndash;</li>&ndash;&gt;-->
-                        <!--<li class="nav-item"><a href="#filter" data-option-value="*" class="selected">All Items</a></li>-->
-                        <!--<li class="nav-item"><a href="#filter" data-option-value=".electronics">Electronics</a></li>-->
-                        <!--<li class="nav-item"><a href="#filter" data-option-value=".fashion_acc">Fashion & Accessories</a></li>-->
-                        <!--<li class="nav-item"><a href="#filter" data-option-value=".home_app">Home & Appliances</a></li>-->
-                        <!--<li class="nav-item"><a href="#filter" data-option-value=".health_beauty">Health & Beauty</a></li>-->
-                        <!--<li class="nav-item"><a href="#filter" data-option-value=".baby_toy">Baby & Toys</a></li>-->
-                        <!--<li class="nav-item"><a href="#filter" data-option-value=".sports_outdoors">Sports & Outdoors</a></li>-->
-                        <!--<li class="nav-item"><a href="#filter" data-option-value=".groceries">Groceries, Pets and Motors</a></li>-->
-                        <!--<li class="nav-item"><a href="#filter" data-option-value=".others">Others</a></li>-->
-                    <!--</ul>-->
-                    <!--&lt;!&ndash;<ul>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<li class="filter-head">Category</li>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<li><a href="#filter" data-option-value="*" class="selected">All Items</a></li>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<li><a href="#filter" data-option-value=".electronics">Electronics</a></li>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<li><a href="#filter" data-option-value=".fashion_acc">Fashion & Accessories</a></li>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<li><a href="#filter" data-option-value=".home_app">Home & Appliances</a></li>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<li><a href="#filter" data-option-value=".health_beauty">Health & Beauty</a></li>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<li><a href="#filter" data-option-value=".baby_toy">Baby & Toys</a></li>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<li><a href="#filter" data-option-value=".sports_outdoors">Sports & Outdoors</a></li>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<li><a href="#filter" data-option-value=".groceries">Groceries, Pets and Motors</a></li>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<li><a href="#filter" data-option-value=".others">Others</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-                <!--</nav>-->
-                <!--&lt;!&ndash; End Filter &ndash;&gt;-->
-            <!--</div>-->
-
-            <!--<div class="masonry-container">-->
-                <!--{% for user_item in all_item_list %}-->
-                    <!--<div class="masonry-item">-->
-                        <!--<img class="item_img_thumb" src="{{ user_item.item_pic }}" alt="{{ user_item.item_pic }}">-->
-                        <!--<p>{{ user_item.title }}</p>-->
-                        <!--<p><img src="{% static 'img/price_icon.png' %}" alt="Price Icon"> :-->
-                            <!--S$ {{ user_item.estimate_price }}</p>-->
-                        <!--{% if user_item.wechat %}-->
-                            <!--<p><img src="{% static 'img/wechat_icon.jpg' %}" alt="Wechat Icon"> : {{ user_item.wechat }}-->
-                            <!--</p>-->
-                        <!--{% endif %}-->
-                    <!--</div>-->
-                <!--{% endfor %}-->
-            <!--</div>-->
         </div>
     </div>
     <!-- End Our Work Section -->
