@@ -18,6 +18,4 @@ $(document).ready(function () {
     modal_span.onclick = function () {
         modal_container.style.display = "none";
     };
-
-    alert('ready');
 });
