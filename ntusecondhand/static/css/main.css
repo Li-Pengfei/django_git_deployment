@@ -417,7 +417,7 @@ nav#menu #menu-nav li a:hover {
     max-width: 90%;
 }
 
-.item_img_thumb {
+.masonry-img-thumb {
     max-width: 100%;
     height: auto;
     display: block;
@@ -426,8 +426,32 @@ nav#menu #menu-nav li a:hover {
     transition: 0.3s;
 }
 
-.item_img_thumb:hover {
+.masonry-img-thumb:hover {
     opacity: 0.7;
+}
+
+.masonry-item .masonry-item-address {
+    display: none;
+}
+
+.masonry-item .masonry-item-category {
+    display: none;
+}
+
+.masonry-item .masonry-item-description {
+    display: none;
+}
+
+#id_modal_details .masonry-item-address {
+    display: block;
+}
+
+#id_modal_details .masonry-item-category {
+    display: block;
+}
+
+#id_modal_details .masonry-item-description {
+    display: block;
 }
 
 /* The Modal (background) */
@@ -441,31 +465,35 @@ nav#menu #menu-nav li a:hover {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
 }
 
-/* Modal Content (Image) */
-.modal-content {
-    margin: 10% 3% 10% 7%;
-    display: inline-block;
+#id_modal_details p {
+    margin: 3% 20% 0 20%;
+    display: block;
     width: 50%;
-    max-width: 700px;
-}
-
-/* Caption of Modal Image (Image Text) - Same Width as the Image */
-#id_modal_details {
-    margin: 10% 3% 5% 7%;
-    display: inline-block;
-    width: 30%;
     text-align: center;
     color: #ccc;
-    padding: 10px 0;
     height: auto;
 }
 
-/* Add Animation - Zoom in the Modal */
-.modal-content, .modal_img_caption {
+.masonry-detail-icon {
+    width: 2rem;
+    height: auto;
+    border-radius: 5px;
+}
+
+#id_modal_details p:last-of-type {
+    margin: 3% 20% 10% 20%;
+}
+
+/* Modal Content (Image) */
+#id_modal_details .masonry-img-thumb {
+    margin: 10% 20% 0 20%;
+    display: block;
+    width: 50%;
+    max-width: 700px;
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
     animation-name: zoom;
@@ -490,24 +518,23 @@ nav#menu #menu-nav li a:hover {
     cursor: pointer;
 }
 
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
-    .modal-content {
-        margin: 10% 25%;
-        width: 50%;
+@-webkit-keyframes zoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
     }
 }
 
-@-webkit-keyframes zoom {
-    from {-webkit-transform:scale(0)}
-    to {-webkit-transform:scale(1)}
-}
-
 @keyframes zoom {
-    from {transform:scale(0)}
-    to {transform:scale(1)}
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
 }
-
 
 .masonry-item p {
     margin: 5px 0;

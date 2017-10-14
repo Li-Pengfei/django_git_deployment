@@ -1,14 +1,15 @@
 {% load staticfiles %}
 <div class="masonry-item">
-    <img class="item_img_thumb" src="{{ user_item.item_pic }}" alt="{{ user_item.item_pic }}">
-    <p><strong>{{ user_item.title }}</strong></p>
-    <p>
-        <img src="{% static 'img/price_icon.png' %}" alt="Price Icon"> :
+    <img class="masonry-img-thumb" src="{{ user_item.item_pic }}" alt="{{ user_item.item_pic }}">
+    <p class="masonry-item-title"><strong>{{ user_item.title }}</strong></p>
+    <p class="masonry-item-price">
+        <img class="masonry-detail-icon" src="{% static 'img/price_icon.png' %}" alt="Price Icon"> :
         S$ {{ user_item.estimate_price }}
     </p>
     {% if user_item.wechat %}
-        <p>
-            <img src="{% static 'img/wechat_icon.jpg' %}" alt="Wechat Icon"> : {{ user_item.wechat }}
-        </p>
+        <p class="masonry-item-wechat"><img class="masonry-detail-icon" src="{% static 'img/wechat_icon.jpg' %}" alt="Wechat Icon"> : {{ user_item.wechat }}</p>
     {% endif %}
+    <p class="masonry-item-category">Category: {{ user_item.category }}</p>
+    <p class="masonry-item-description">Description:<br/>{{ user_item.description }}</p>
+    <p class="masonry-item-address">Exchange Address:<br/>{{ user_item.exchange_address }}</p>
 </div>

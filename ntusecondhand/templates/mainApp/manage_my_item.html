@@ -36,7 +36,7 @@
             <div class="masonry-container">
                 {% for user_item in all_item_list %}
                     <div class="masonry-item">
-                        <img class="item_img_thumb" src="{{ user_item.item_pic }}" alt="{{ user_item.item_pic }}">
+                        <img class="masonry-img-thumb" src="{{ user_item.item_pic }}" alt="{{ user_item.item_pic }}">
                         <p>{{ user_item.title }}</p>
                         <p><img src="{% static 'img/price_icon.png' %}" alt="Price Icon"> :
                             S$ {{ user_item.estimate_price }}</p>
