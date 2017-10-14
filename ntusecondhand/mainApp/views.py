@@ -50,10 +50,12 @@ class RegisterView(View):
                 profile.profile_pic = request.FILES['profile_pic']
 
             profile.save()
-            registered = True
-            return render(request, 'mainApp/registration.html', context={
-                'user_form': user_form, 'profile_form': profile_form, 'registered': registered,
-            })
+            # registered = True
+            login(request, user)
+            # return render(request, 'mainApp/registration.html', context={
+            #     'user_form': user_form, 'profile_form': profile_form, 'registered': registered,
+            # })
+            return HttpResponseRedirect(reverse('index'))
         else:
             print(user_form.errors, profile_form.errors)
             user_form = UserForm()
