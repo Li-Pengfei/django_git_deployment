@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% extends 'mainApp/base.html' %}
 {% load staticfiles %}
+
 {% block body_block %}
 
     <!-- Our Work Section -->
@@ -8,7 +9,7 @@
         <div class="container">
             <!-- Title Page -->
             <div class="title-page">
-                <h2 class="title">ALL ITEM LIST</h2>
+                <h2 class="title">Manage My Items</h2>
             </div>
             <!-- End Title Page -->
 
@@ -33,13 +34,10 @@
             </div>
 
             <div class="masonry-container">
-                {% for user_item in all_item_list %}
+                {% for user_item in user_item_list %}
                     <div class="masonry-item">
                         <img src="{{ user_item.item_pic }}" alt="{{ user_item.item_pic }}">
                         <p>{{ user_item.title }}</p>
-                        {% if user_item.wechat %}
-                            <p>Wechat: {{ user_item.wechat }}</p>
-                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
