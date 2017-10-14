@@ -514,14 +514,13 @@ nav#menu #menu-nav li a:hover {
 }
 
 .masonry-item p img {
-    width: 2em;
+    width: 2rem;
     height: auto;
 }
 
 .masonry-container {
-    left: 30%;
-    width: 70%;
-    margin: 1.5em 0 1.5em 1.5em;
+    width: 100%;
+    margin: 0.5em;
     padding: 0;
     -moz-column-gap: 1.5em;
     -webkit-column-gap: 1.5em;
@@ -534,7 +533,7 @@ nav#menu #menu-nav li a:hover {
 .masonry-item {
     display: inline-block;
     background: #fff;
-    padding: 1.5em;
+    padding: 0.5rem;
     margin: 0 0 1.5em;
     width: 100%;
     box-sizing: border-box;
