@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <div class="masonry-item">
     <img class="item_img_thumb" src="{{ user_item.item_pic }}" alt="{{ user_item.item_pic }}">
-    <p>{{ user_item.title }}</p>
+    <p><strong>{{ user_item.title }}</strong></p>
     <p>
         <img src="{% static 'img/price_icon.png' %}" alt="Price Icon"> :
         S$ {{ user_item.estimate_price }}
