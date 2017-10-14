@@ -137,14 +137,56 @@ class UserLoginView(View):
 
 
 class ManageMyItemView(TemplateView):
-    template_name = 'mainApp/manageMyItem.html'
+    template_name = 'mainApp/index.html'
 
     def get_context_data(self, **kwargs):
         context = super(ManageMyItemView, self).get_context_data(**kwargs)
 
         # Load User Items
         user = self.request.user
-        context['user_item_list'] = ItemModel.objects.filter(user=user)
+        all_item_list = ItemModel.objects.filter(user=user)
+        electronic_item_list = []
+        fashion_item_list = []
+        home_item_list = []
+        health_item_list = []
+        baby_item_list = []
+        sports_item_list = []
+        grocery_item_list = []
+        others_item_list = []
+
+        for item in all_item_list:
+            if item.category == 'EL':
+                electronic_item_list.append(item)
+            elif item.category == 'FA':
+                fashion_item_list.append(item)
+            elif item.category == 'HA':
+                home_item_list.append(item)
+            elif item.category == 'HB':
+                health_item_list.append(item)
+            elif item.category == 'BT':
+                baby_item_list.append(item)
+            elif item.category == 'SO':
+                sports_item_list.append(item)
+            elif item.category == 'GC':
+                grocery_item_list.append(item)
+            else:
+                others_item_list.append(item)
+
+            try:
+                wechat = UserProfileInfo.objects.get(user=item.user).wechat
+            except UserProfileInfo.DoesNotExist:
+                wechat = None
+            item.wechat = wechat
+
+        context['all_item_list'] = all_item_list
+        context['elec_item_list'] = electronic_item_list
+        context['fash_item_list'] = fashion_item_list
+        context['home_item_list'] = home_item_list
+        context['heal_item_list'] = health_item_list
+        context['baby_item_list'] = baby_item_list
+        context['spor_item_list'] = sports_item_list
+        context['groc_item_list'] = grocery_item_list
+        context['othe_item_list'] = others_item_list
         return context
 
 
