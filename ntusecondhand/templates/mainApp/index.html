@@ -14,27 +14,82 @@
     <div id="work" class="page">
         <div class="container">
             <!-- Title Page -->
-            <div class="title-page">
-                <h2 class="title">ALL ITEM LIST</h2>
-            </div>
+            <!--<div class="title-page">-->
+                <!--<h2 class="title">ALL ITEM LIST</h2>-->
+            <!--</div>-->
             <!-- End Title Page -->
 
             <!-- Portfolio Projects -->
+
+            <div class="row">
+                <div class="col-3">
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
+                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-expanded="true">Home</a>
+                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-expanded="false">Profile</a>
+                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-expanded="false">Messages</a>
+                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-expanded="false">Settings</a>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade active show" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" aria-expanded="true">
+                            <div class="masonry-container">
+                                {% for user_item in all_item_list %}
+                                    <div class="masonry-item">
+                                        <img class="item_img_thumb" src="{{ user_item.item_pic }}" alt="{{ user_item.item_pic }}">
+                                        <p>{{ user_item.title }}</p>
+                                        <p><img src="{% static 'img/price_icon.png' %}" alt="Price Icon"> :
+                                            S$ {{ user_item.estimate_price }}</p>
+                                        {% if user_item.wechat %}
+                                            <p><img src="{% static 'img/wechat_icon.jpg' %}" alt="Wechat Icon"> : {{ user_item.wechat }}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" aria-expanded="false">
+                            <p>Culpa dolor voluptate do laboris laboris irure reprehenderit id incididunt duis pariatur mollit aute magna pariatur consectetur. Eu veniam duis non ut dolor deserunt commodo et minim in quis laboris ipsum velit id veniam. Quis ut consectetur adipisicing officia excepteur non sit. Ut et elit aliquip labore Lorem enim eu. Ullamco mollit occaecat dolore ipsum id officia mollit qui esse anim eiusmod do sint minim consectetur qui.</p>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" aria-expanded="false">
+                            <p>Fugiat id quis dolor culpa eiusmod anim velit excepteur proident dolor aute qui magna. Ad proident laboris ullamco esse anim Lorem Lorem veniam quis Lorem irure occaecat velit nostrud magna nulla. Velit et et proident Lorem do ea tempor officia dolor. Reprehenderit Lorem aliquip labore est magna commodo est ea veniam consectetur.</p>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" aria-expanded="false">
+                            <p>Eu dolore ea ullamco dolore Lorem id cupidatat excepteur reprehenderit consectetur elit id dolor proident in cupidatat officia. Voluptate excepteur commodo labore nisi cillum duis aliqua do. Aliqua amet qui mollit consectetur nulla mollit velit aliqua veniam nisi id do Lorem deserunt amet. Culpa ullamco sit adipisicing labore officia magna elit nisi in aute tempor commodo eiusmod.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="cat-list">
                 <!-- Filter -->
                 <nav id="filter-nav" class="work-nav">
-                    <ul>
-                        <li class="filter-head">Category</li>
-                        <li><a href="#filter" data-option-value="*" class="selected">All Items</a></li>
-                        <li><a href="#filter" data-option-value=".electronics">Electronics</a></li>
-                        <li><a href="#filter" data-option-value=".fashion_acc">Fashion & Accessories</a></li>
-                        <li><a href="#filter" data-option-value=".home_app">Home & Appliances</a></li>
-                        <li><a href="#filter" data-option-value=".health_beauty">Health & Beauty</a></li>
-                        <li><a href="#filter" data-option-value=".baby_toy">Baby & Toys</a></li>
-                        <li><a href="#filter" data-option-value=".sports_outdoors">Sports & Outdoors</a></li>
-                        <li><a href="#filter" data-option-value=".groceries">Groceries, Pets and Motors</a></li>
-                        <li><a href="#filter" data-option-value=".others">Others</a></li>
+                    <ul class="nav flex-column">
+                        <!--<li class="nav-item">-->
+                            <!--<a class="nav-link" href="#">Active</a>-->
+                        <!--</li>-->
+                        <li class="nav-item"><a href="#filter" data-option-value="*" class="selected">All Items</a></li>
+                        <li class="nav-item"><a href="#filter" data-option-value=".electronics">Electronics</a></li>
+                        <li class="nav-item"><a href="#filter" data-option-value=".fashion_acc">Fashion & Accessories</a></li>
+                        <li class="nav-item"><a href="#filter" data-option-value=".home_app">Home & Appliances</a></li>
+                        <li class="nav-item"><a href="#filter" data-option-value=".health_beauty">Health & Beauty</a></li>
+                        <li class="nav-item"><a href="#filter" data-option-value=".baby_toy">Baby & Toys</a></li>
+                        <li class="nav-item"><a href="#filter" data-option-value=".sports_outdoors">Sports & Outdoors</a></li>
+                        <li class="nav-item"><a href="#filter" data-option-value=".groceries">Groceries, Pets and Motors</a></li>
+                        <li class="nav-item"><a href="#filter" data-option-value=".others">Others</a></li>
                     </ul>
+                    <!--<ul>-->
+                        <!--<li class="filter-head">Category</li>-->
+                        <!--<li><a href="#filter" data-option-value="*" class="selected">All Items</a></li>-->
+                        <!--<li><a href="#filter" data-option-value=".electronics">Electronics</a></li>-->
+                        <!--<li><a href="#filter" data-option-value=".fashion_acc">Fashion & Accessories</a></li>-->
+                        <!--<li><a href="#filter" data-option-value=".home_app">Home & Appliances</a></li>-->
+                        <!--<li><a href="#filter" data-option-value=".health_beauty">Health & Beauty</a></li>-->
+                        <!--<li><a href="#filter" data-option-value=".baby_toy">Baby & Toys</a></li>-->
+                        <!--<li><a href="#filter" data-option-value=".sports_outdoors">Sports & Outdoors</a></li>-->
+                        <!--<li><a href="#filter" data-option-value=".groceries">Groceries, Pets and Motors</a></li>-->
+                        <!--<li><a href="#filter" data-option-value=".others">Others</a></li>-->
+                    <!--</ul>-->
                 </nav>
                 <!-- End Filter -->
             </div>
