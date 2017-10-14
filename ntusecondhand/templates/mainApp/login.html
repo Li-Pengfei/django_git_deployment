@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-{% extends 'mainApp/base_pure.html' %}
+{% extends 'mainApp/base.html' %}
 {% load staticfiles %}
 
 {% block body_block %}
 
-    <div>
+    <div class="page container">
         <h1>Please Login</h1>
         <form class="pure-form" action="{% url 'mainApp:user_login' %}" method="post">
             {% csrf_token %}
@@ -18,7 +18,7 @@
             <!--<input type="submit" value="Login">-->
             <button type="submit" class="pure-button pure-button-primary" style="margin: 0.5rem;">Login</button>
         </form>
-    
+
     </div>
 
 {% endblock %}
