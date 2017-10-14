@@ -37,8 +37,9 @@
                     <div class="masonry-item">
                         <img src="{{ user_item.item_pic }}" alt="{{ user_item.item_pic }}">
                         <p>{{ user_item.title }}</p>
+                        <p><img src="{% static 'img/price_icon.png' %}" alt="Price Icon"> : S$ {{ user_item.estimate_price }}</p>
                         {% if user_item.wechat %}
-                            <p><img src="{% static 'img/wechat_icon.jpg' %}" alt=""> : {{ user_item.wechat }}</p>
+                            <p><img src="{% static 'img/wechat_icon.jpg' %}" alt="Wechat Icon"> : {{ user_item.wechat }}</p>
                         {% endif %}
                     </div>
                 {% endfor %}
