@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from mainApp.forms import UserForm, UserProfileInfoForm
+from mainApp.forms import UserForm, UserProfileInfoForm, AddItemModelForm
+from mainApp.models import ItemModel, UserProfileInfo
 
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -15,7 +16,18 @@ class IndexView(TemplateView):
     template_name = 'mainApp/index.html'
 
     def get_context_data(self, **kwargs):
-        pass
+        context = super(IndexView, self).get_context_data(**kwargs)
+
+        all_item_list = ItemModel.objects.all()
+        for item in all_item_list:
+            try:
+                wechat = UserProfileInfo.objects.get(user=item.user).wechat
+            except UserProfileInfo.DoesNotExist:
+                wechat = None
+            item.wechat = wechat
+
+        context['all_item_list'] = all_item_list
+        return context
 
 
 class RegisterView(View):
@@ -67,7 +79,6 @@ class UserLogoutView(View):
 
 
 class UserLoginView(View):
-
     def post(self, request, *args, **kwargs):
 
         username = request.POST.get('username')
@@ -88,3 +99,45 @@ class UserLoginView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'mainApp/login.html', {})
 
+
+class ManageMyItemView(TemplateView):
+    template_name = 'mainApp/manageMyItem.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ManageMyItemView, self).get_context_data(**kwargs)
+
+        # Load User Items
+        user = self.request.user
+        context['user_item_list'] = ItemModel.objects.filter(user=user)
+        return context
+
+
+class AddItemView(View):
+
+    def post(self, request, *args, **kwargs):
+        added = False
+        item_form = AddItemModelForm(data=request.POST)
+
+        if item_form.is_valid():
+
+            item = item_form.save(commit=False)
+            item.user = request.user
+            item.save()
+
+            added = True
+            return render(request, 'mainApp/addItem.html', context={
+                'item_form': item_form, 'added': added,
+            })
+        else:
+            print(item_form.errors)
+            item_form = AddItemModelForm()
+            return render(request, 'mainApp/addItem.html', context={
+                'item_form': item_form, 'added': added,
+            })
+
+    def get(self, request, *args, **kwargs):
+        added = False
+        item_form = AddItemModelForm()
+        return render(request, 'mainApp/addItem.html', context={
+            'item_form': item_form, 'added': added,
+        })
