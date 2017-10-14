@@ -192,9 +192,12 @@ class MakeOfferView(View):
     def post(self, request, *args, **kwargs):
 
         item = ItemModel.objects.get(pk=request.POST.get('item'))
+        all_item_list = []
+        if request.user.is_authenticated:
+            all_item_list = ItemModel.objects.filter(user=request.user)
 
         if item:
-            return render(request, 'mainApp/make_offer.html', {"item": item})
+            return render(request, 'mainApp/make_offer.html', {"item": item, "all_item_list": all_item_list})
         else:
             return HttpResponse('invalid item id')
 

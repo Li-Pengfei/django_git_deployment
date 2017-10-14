@@ -10,7 +10,19 @@ $(document).ready(function () {
     var modal_span = document.getElementsByClassName("modal_close")[0];
 
     // When the user clicks on <modal_span> (x), close the modal_container
-    modal_span.onclick = function () {
-        $('#id_modal_container').css('display', 'none');
-    };
+    if (modal_span) {
+        modal_span.onclick = function () {
+            $('#id_modal_container').css('display', 'none');
+        };
+    }
+
+    $('input[type=radio][name=offer_type]').change(function() {
+        if (this.value == 'CS') {
+
+        }
+        else if (this.value == 'EX') {
+
+        }
+    });
+
 });
