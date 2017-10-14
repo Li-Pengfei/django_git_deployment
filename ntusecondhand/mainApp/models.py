@@ -20,7 +20,7 @@ class UserProfileInfo(models.Model):
 # Item Model
 class ItemModel(models.Model):
 
-    CAT_CHOICES = (
+    CAT_CHOICES = [
         ('EL', 'Electronics'),
         ('FA', 'Fashion & Accessories'),
         ('HA', 'Home & Appliances'),
@@ -29,7 +29,7 @@ class ItemModel(models.Model):
         ('SO', 'Sports & Outdoors'),
         ('GC', 'Groceries'),
         ('OT', 'Others'),
-    )
+    ]
 
     user = models.ForeignKey(User, related_name='items')
     category = models.CharField(max_length=64, choices=CAT_CHOICES)
@@ -41,3 +41,6 @@ class ItemModel(models.Model):
 
     def __str__(self):
         return str(self.user) + ": " + self.title
+
+    def category_verbose(self):
+        return dict(ItemModel.CAT_CHOICES)[self.category]

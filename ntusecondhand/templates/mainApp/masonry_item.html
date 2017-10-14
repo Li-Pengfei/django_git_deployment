@@ -9,7 +9,7 @@
     {% if user_item.wechat %}
         <p class="masonry-item-wechat"><img class="masonry-detail-icon" src="{% static 'img/wechat_icon.jpg' %}" alt="Wechat Icon"> : {{ user_item.wechat }}</p>
     {% endif %}
-    <p class="masonry-item-category">Category: {{ user_item.category }}</p>
+    <p class="masonry-item-category">Category: {{ user_item.category_verbose }}</p>
     <p class="masonry-item-description">Description:<br/>{{ user_item.description }}</p>
     <p class="masonry-item-address">Exchange Address:<br/>{{ user_item.exchange_address }}</p>
 </div>
