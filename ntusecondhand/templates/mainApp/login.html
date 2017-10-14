@@ -4,7 +4,7 @@
 
 {% block body_block %}
 
-    <div class="jumbotron">
+    <div>
         <h1>Please Login</h1>
         <form action="{% url 'mainApp:user_login' %}" method="post">
             {% csrf_token %}
