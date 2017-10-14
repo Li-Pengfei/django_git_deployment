@@ -202,10 +202,7 @@ class AddItemView(View):
             item.user = request.user
             item.save()
 
-            added = True
-            return render(request, 'mainApp/addItem.html', context={
-                'item_form': item_form, 'added': added,
-            })
+            return HttpResponseRedirect(reverse('mainApp:manage_my_items'))
         else:
             print(item_form.errors)
             item_form = AddItemModelForm()
