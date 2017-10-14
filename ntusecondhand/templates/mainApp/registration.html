@@ -11,11 +11,12 @@
             <h1>Register Here!</h1>
             <h3>Fill out the form:</h3>
 
-            <form enctype="multipart/form-data" method="post">
+            <form class="pure-form pure-form-stacked" enctype="multipart/form-data" method="post" style="margin-bottom: 3rem;">
                 {% csrf_token %}
                 {{ user_form.as_p }}
                 {{ profile_form.as_p }}
-                <input type="submit" name="" value="Register">
+                <!--<input type="submit" name="" value="Register">-->
+                <button type="submit" class="pure-button pure-button-primary">Register</button>
             </form>
         {% endif %}
     </div>
