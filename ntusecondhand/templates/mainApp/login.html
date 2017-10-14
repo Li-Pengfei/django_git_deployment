@@ -6,7 +6,7 @@
 
     <div>
         <h1>Please Login</h1>
-        <form action="{% url 'mainApp:user_login' %}" method="post">
+        <form class="pure-form" action="{% url 'mainApp:user_login' %}" method="post">
             {% csrf_token %}
 
             <label for="username">Username:</label>
@@ -15,7 +15,8 @@
             <label for="password">Password:</label>
             <input type="password" name="password" placeholder="Enter Password">
 
-            <input type="submit" value="Login">
+            <!--<input type="submit" value="Login">-->
+            <button type="submit" class="pure-button pure-button-primary" style="margin: 0.5rem;">Login</button>
         </form>
     
     </div>
