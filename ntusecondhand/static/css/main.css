@@ -417,11 +417,21 @@ nav#menu #menu-nav li a:hover {
     max-width: 90%;
 }
 
-.masonry-item img {
+.masonry-item > img {
     max-width: 100%;
     height: auto;
     display: block;
 }
+
+.masonry-item p {
+    margin: 5px 0;
+}
+
+.masonry-item p img {
+    width: 2em;
+    height: auto;
+}
+
 
 .masonry-container {
     left: 30%;

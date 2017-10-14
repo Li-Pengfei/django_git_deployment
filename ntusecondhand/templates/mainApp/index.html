@@ -38,7 +38,7 @@
                         <img src="{{ user_item.item_pic }}" alt="{{ user_item.item_pic }}">
                         <p>{{ user_item.title }}</p>
                         {% if user_item.wechat %}
-                            <p>Wechat: {{ user_item.wechat }}</p>
+                            <p><img src="{% static 'img/wechat_icon.jpg' %}" alt=""> : {{ user_item.wechat }}</p>
                         {% endif %}
                     </div>
                 {% endfor %}
