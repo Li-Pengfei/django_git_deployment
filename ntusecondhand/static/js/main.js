@@ -3,7 +3,7 @@ $(document).ready(function () {
     // Get the modal_container
     var modal_container = document.getElementById('id_modal_container');
     var modal_img = document.getElementById("id_modal_img");
-    var modal_caption = document.getElementById("id_modal_caption");
+    var modal_caption = document.getElementById("id_modal_details");
 
     $(".item_img_thumb").click(function () {
         modal_container.style.display = "block";

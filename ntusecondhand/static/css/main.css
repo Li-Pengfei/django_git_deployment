@@ -447,22 +447,21 @@ nav#menu #menu-nav li a:hover {
 
 /* Modal Content (Image) */
 .modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
+    margin: 10% 3% 10% 7%;
+    display: inline-block;
+    width: 50%;
     max-width: 700px;
 }
 
 /* Caption of Modal Image (Image Text) - Same Width as the Image */
-#id_modal_caption {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
+#id_modal_details {
+    margin: 10% 3% 5% 7%;
+    display: inline-block;
+    width: 30%;
     text-align: center;
     color: #ccc;
     padding: 10px 0;
-    height: 150px;
+    height: auto;
 }
 
 /* Add Animation - Zoom in the Modal */
@@ -494,7 +493,8 @@ nav#menu #menu-nav li a:hover {
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px){
     .modal-content {
-        width: 100%;
+        margin: 10% 25%;
+        width: 50%;
     }
 }
 
