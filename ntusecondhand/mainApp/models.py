@@ -31,10 +31,18 @@ class ItemModel(models.Model):
         ('OT', 'Others'),
     ]
 
+    CONDITION_CHOICES = [
+        ('Used', 'Used'),
+        ('New', 'New'),
+        ('80', '80% New'),
+        ('Obsolete', 'Obsolete',)
+    ]
+
     user = models.ForeignKey(User, related_name='items')
     category = models.CharField(max_length=64, choices=CAT_CHOICES)
     title = models.CharField(max_length=128)
     description = models.TextField(max_length=1024)
+    condition = models.CharField(max_length=64, choices=CONDITION_CHOICES)
     estimate_price = models.PositiveIntegerField()
     exchange_address = models.TextField(max_length=256)
     item_pic = models.URLField()
