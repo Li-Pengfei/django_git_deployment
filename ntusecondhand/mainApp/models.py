@@ -10,7 +10,7 @@ class UserProfileInfo(models.Model):
 
     # add any additional attributes you want
     wechat = models.CharField(max_length=128)
-
+    postal_code = models.CharField(max_length=6)
     profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
 
     def __str__(self):

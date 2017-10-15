@@ -15,7 +15,7 @@ class UserProfileInfoForm(forms.ModelForm):
 
     class Meta:
         model = UserProfileInfo
-        fields = ('wechat', 'profile_pic')
+        fields = ('wechat', 'postal_code', 'profile_pic')
 
 
 class AddItemModelForm(forms.ModelForm):
