@@ -217,7 +217,7 @@ class AddOfferView(View):
             Offer.objects.create(initiator=offer_item, receiver=target_item, offer_type=offer_type, offer_status=offer_status)
         else:
             Offer.objects.create(receiver=target_item, offer_type=offer_type, offer_status=offer_status)
-        return HttpResponseRedirect(reverse('index'))
+        return HttpResponseRedirect(reverse('mainApp:manage_my_offers'))
 
     def get(self, request, *args, **kwargs):
         return HttpResponse('this url does not accept GET request')
