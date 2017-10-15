@@ -1,9 +1,33 @@
-<div class="card text-white bg-success" style="width: 50rem; margin-top: 1rem;">
+<div class="card text-white bg-info" style="width: 50rem; margin-top: 1rem;">
     <div class="card-body">
-        <h4 class="card-title">Trade in: {{offer.initiator}}</h4>
-        <h6 class="card-subtitle mb-2">Trade out: {{offer.receiver}}</h6>
+        <h4 class="card-title">Trade in: {{ offer.initiator }}</h4>
+        <h6 class="card-subtitle mb-2">Trade out: {{ offer.receiver }}</h6>
+        <p class="card-text">
+            Distance: {{ offer.distance }}
+        </p>
         <p class="card-text">
             Someone else wants to trade with you!
         </p>
+
+        {% if offer.offer_status == 'ON' %}
+            <div class="row">
+                <div class="col-6">
+                    <form action="{% url 'mainApp:manage_my_offers' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="offer_id" value={{ offer.id }}>
+                        <input type="hidden" name="status" value="FI">
+                        <button type="submit" class="btn btn-success btn-block">Accept</button>
+                    </form>
+                </div>
+                <div class="col-6">
+                    <form action="{% url 'mainApp:manage_my_offers' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="offer" value={{ offer.id }}>
+                        <input type="hidden" name="status" value="CA">
+                        <button type="submit" class="btn btn-danger btn-block">Decline</button>
+                    </form>
+                </div>
+            </div>
+        {% endif %}
     </div>
 </div>

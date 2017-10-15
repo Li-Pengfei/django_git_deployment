@@ -42,7 +42,7 @@ class ItemModel(models.Model):
     category = models.CharField(max_length=64, choices=CAT_CHOICES)
     title = models.CharField(max_length=128)
     description = models.TextField(max_length=1024)
-    condition = models.CharField(max_length=64, choices=CONDITION_CHOICES)
+    condition = models.CharField(max_length=64, choices=CONDITION_CHOICES, default="Used")
     estimate_price = models.PositiveIntegerField()
     exchange_address = models.TextField(max_length=256)
     item_pic = models.URLField()

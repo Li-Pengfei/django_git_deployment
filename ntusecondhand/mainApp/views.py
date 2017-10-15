@@ -1,3 +1,4 @@
+import googlemaps
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -214,7 +215,8 @@ class AddOfferView(View):
         offer_status = 'ON'
         if offer_type == 'EX':
             offer_item = ItemModel.objects.get(pk=request.POST.get('offer_item'))
-            Offer.objects.create(initiator=offer_item, receiver=target_item, offer_type=offer_type, offer_status=offer_status)
+            Offer.objects.create(initiator=offer_item, receiver=target_item, offer_type=offer_type,
+                                 offer_status=offer_status)
         else:
             Offer.objects.create(receiver=target_item, offer_type=offer_type, offer_status=offer_status)
         return HttpResponseRedirect(reverse('mainApp:manage_my_offers'))
@@ -223,19 +225,48 @@ class AddOfferView(View):
         return HttpResponse('this url does not accept GET request')
 
 
-class ManageMyOfferView(TemplateView):
-    template_name = 'mainApp/manage_offers.html'
+class ManageMyOfferView(View):
 
-    def get_context_data(self, **kwargs):
-        context = super(ManageMyOfferView, self).get_context_data(**kwargs)
-        held_items = ItemModel.objects.filter(user=self.request.user)
+    def prepare_context(self, request):
+        context = {}
+
+        googlemap_client = googlemaps.Client('AIzaSyBWzBAHevgilfjYaEvt4LjhKI5eJWasEwk')
+        held_items = ItemModel.objects.filter(user=request.user)
 
         incoming_offers = Offer.objects.filter(receiver__in=held_items)
         outgoing_offers = Offer.objects.filter(initiator__in=held_items)
 
+        for in_offer in incoming_offers:
+            in_user_address = "Singapore " + UserProfileInfo.objects.get(user=in_offer.initiator.user).postal_code
+            out_user_address = "Singapore " + UserProfileInfo.objects.get(user=in_offer.receiver.user).postal_code
+
+            distance_matrix = googlemap_client.distance_matrix(in_user_address, out_user_address)
+            in_offer.distance = distance_matrix['rows'][0]['elements'][0]['distance']['text']
+
+        for out_offer in outgoing_offers:
+            in_user_address = "Singapore " + UserProfileInfo.objects.get(user=out_offer.initiator.user).postal_code
+            out_user_address = "Singapore " + UserProfileInfo.objects.get(user=out_offer.receiver.user).postal_code
+
+            distance_matrix = googlemap_client.distance_matrix(in_user_address, out_user_address)
+            out_offer.distance = distance_matrix['rows'][0]['elements'][0]['distance']['text']
+
         context['incoming_offers'] = incoming_offers
         context['outgoing_offers'] = outgoing_offers
         return context
+
+    def post(self, request, *args, **kwargs):
+
+        offer_id = request.POST.get('offer_id')
+        offer = Offer.objects.get(pk=offer_id)
+        offer.offer_status = request.POST.get('status')
+        offer.save()
+
+        context = self.prepare_context(request)
+        return render(request, 'mainApp/manage_offers.html', context=context)
+
+    def get(self, request, *args, **kwargs):
+        context = self.prepare_context(request)
+        return render(request, 'mainApp/manage_offers.html', context=context)
 
 
 class ManageMyItemView(TemplateView):
