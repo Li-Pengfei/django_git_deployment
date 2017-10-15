@@ -67,6 +67,9 @@ class Offer(models.Model):
         ('CA', 'Canceled'),
     ]
 
+    def status_verbose(self):
+        return dict(Offer.STAT_CHOICES)[self.offer_status]
+
     initiator = models.ForeignKey(ItemModel, related_name='offered', blank=True, null=True)
     receiver = models.ForeignKey(ItemModel, related_name='wanted')
 
