@@ -239,16 +239,25 @@ class ManageMyOfferView(View):
         for in_offer in incoming_offers:
             in_user_address = "Singapore " + UserProfileInfo.objects.get(user=in_offer.initiator.user).postal_code
             out_user_address = "Singapore " + UserProfileInfo.objects.get(user=in_offer.receiver.user).postal_code
+            try:
+                distance_matrix = googlemap_client.distance_matrix(in_user_address, out_user_address)
+                distance_value = distance_matrix['rows'][0]['elements'][0]['distance']['text']
+            except :
+                distance_value = 'Not Available'
 
-            distance_matrix = googlemap_client.distance_matrix(in_user_address, out_user_address)
-            in_offer.distance = distance_matrix['rows'][0]['elements'][0]['distance']['text']
+            in_offer.distance = distance_value
 
         for out_offer in outgoing_offers:
             in_user_address = "Singapore " + UserProfileInfo.objects.get(user=out_offer.initiator.user).postal_code
             out_user_address = "Singapore " + UserProfileInfo.objects.get(user=out_offer.receiver.user).postal_code
 
-            distance_matrix = googlemap_client.distance_matrix(in_user_address, out_user_address)
-            out_offer.distance = distance_matrix['rows'][0]['elements'][0]['distance']['text']
+            try:
+                distance_matrix = googlemap_client.distance_matrix(in_user_address, out_user_address)
+                distance_value = distance_matrix['rows'][0]['elements'][0]['distance']['text']
+            except :
+                distance_value = 'Not Available'
+
+            out_offer.distance = distance_value
 
         context['incoming_offers'] = incoming_offers
         context['outgoing_offers'] = outgoing_offers
