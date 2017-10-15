@@ -228,6 +228,13 @@ class ManageMyOfferView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ManageMyOfferView, self).get_context_data(**kwargs)
+        held_items = ItemModel.objects.filter(user=self.request.user)
+
+        incoming_offers = Offer.objects.filter(receiver__in=held_items)
+        outgoing_offers = Offer.objects.filter(initiator__in=held_items)
+
+        context['incoming_offers'] = incoming_offers
+        context['outgoing_offers'] = outgoing_offers
         return context
 
 

@@ -4,8 +4,16 @@
 {% block body_block %}
 
     <!-- Our Work Section -->
-    <div class="page">
+    <div class="container page">
+        <h3 style="margin-top: 1rem;">Incoming Offers</h3>
+        {% for offer in incoming_offers %}
+            {% include 'mainapp/offer_card_in.html' %}
+        {% endfor %}
 
+        <h3 style="margin-top: 1rem;">Outgoing Offers</h3>
+        {% for offer in outgoing_offers %}
+            {% include 'mainapp/offer_card_out.html' %}
+        {% endfor %}
     </div>
     <!-- End Our Work Section -->
 
