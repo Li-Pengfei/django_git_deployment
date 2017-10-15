@@ -10,7 +10,6 @@ __pycache__/
 
 # custom
 .idea/
-*.sqlite3
 *.pyc
 media/
 
