@@ -49,10 +49,11 @@
                 {% if user.is_authenticated %}
                     <li>Welcome, {{ user.username }}</li>
                 {% endif %}
-                <li><a href="{% url 'index' %}#work">Browse All</a></li>
+                <li><a href="{% url 'index' %}">Browse All</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'mainApp:addItem' %}#work">Add Item</a></li>
-                    <li><a href="{% url 'mainApp:manage_my_items' %}#work">Manage My Items</a></li>
+                    <li><a href="{% url 'mainApp:addItem' %}">Add Item</a></li>
+                    <li><a href="{% url 'mainApp:manage_my_items' %}">Manage My Items</a></li>
+                    <li><a href="{% url 'mainApp:manage_my_offers' %}">Manage My Offers</a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'mainApp:register' %}">Sign Up</a></li>

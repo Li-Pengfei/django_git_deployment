@@ -223,6 +223,14 @@ class AddOfferView(View):
         return HttpResponse('this url does not accept GET request')
 
 
+class ManageMyOfferView(TemplateView):
+    template_name = 'mainApp/manage_offers.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ManageMyOfferView, self).get_context_data(**kwargs)
+        return context
+
+
 class ManageMyItemView(TemplateView):
     template_name = 'mainApp/index.html'
 
