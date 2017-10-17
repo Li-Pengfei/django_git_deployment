@@ -1,0 +1,56 @@
+<div class="tab-content" id="v-pills-tabContent">
+    <div class="tab-pane fade active show masonry-container" id="v-pills-all" role="tabpanel"
+         aria-labelledby="v-pills-all-tab" aria-expanded="true">
+        {% for user_item in all_item_list %}
+            {% include 'mainapp/masonry_item.html' %}
+        {% endfor %}
+    </div>
+    <div class="tab-pane fade masonry-container" id="v-pills-electronics" role="tabpanel"
+         aria-labelledby="v-pills-electronics-tab" aria-expanded="false">
+        {% for user_item in elec_item_list %}
+            {% include 'mainapp/masonry_item.html' %}
+        {% endfor %}
+    </div>
+    <div class="tab-pane fade masonry-container" id="v-pills-fashion" role="tabpanel"
+         aria-labelledby="v-pills-fashion-tab" aria-expanded="false">
+        {% for user_item in fash_item_list %}
+            {% include 'mainapp/masonry_item.html' %}
+        {% endfor %}
+    </div>
+    <div class="tab-pane fade masonry-container" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
+         aria-expanded="false">
+        {% for user_item in home_item_list %}
+            {% include 'mainapp/masonry_item.html' %}
+        {% endfor %}
+    </div>
+    <div class="tab-pane fade masonry-container" id="v-pills-health" role="tabpanel"
+         aria-labelledby="v-pills-health-tab" aria-expanded="false">
+        {% for user_item in heal_item_list %}
+            {% include 'mainapp/masonry_item.html' %}
+        {% endfor %}
+    </div>
+    <div class="tab-pane fade masonry-container" id="v-pills-baby" role="tabpanel" aria-labelledby="v-pills-baby-tab"
+         aria-expanded="false">
+        {% for user_item in baby_item_list %}
+            {% include 'mainapp/masonry_item.html' %}
+        {% endfor %}
+    </div>
+    <div class="tab-pane fade masonry-container" id="v-pills-sports" role="tabpanel"
+         aria-labelledby="v-pills-sports-tab" aria-expanded="false">
+        {% for user_item in spor_item_list %}
+            {% include 'mainapp/masonry_item.html' %}
+        {% endfor %}
+    </div>
+    <div class="tab-pane fade masonry-container" id="v-pills-grocery" role="tabpanel"
+         aria-labelledby="v-pills-grocery-tab" aria-expanded="false">
+        {% for user_item in groc_item_list %}
+            {% include 'mainapp/masonry_item.html' %}
+        {% endfor %}
+    </div>
+    <div class="tab-pane fade masonry-container" id="v-pills-others" role="tabpanel"
+         aria-labelledby="v-pills-others-tab" aria-expanded="false">
+        {% for user_item in othe_item_list %}
+            {% include 'mainapp/masonry_item.html' %}
+        {% endfor %}
+    </div>
+</div>

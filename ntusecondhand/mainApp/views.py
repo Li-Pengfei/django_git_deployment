@@ -226,7 +226,6 @@ class AddOfferView(View):
 
 
 class ManageMyOfferView(View):
-
     def prepare_context(self, request):
         context = {}
 
@@ -242,7 +241,7 @@ class ManageMyOfferView(View):
             try:
                 distance_matrix = googlemap_client.distance_matrix(in_user_address, out_user_address)
                 distance_value = distance_matrix['rows'][0]['elements'][0]['distance']['text']
-            except :
+            except:
                 distance_value = 'Not Available'
 
             in_offer.distance = distance_value
@@ -254,7 +253,7 @@ class ManageMyOfferView(View):
             try:
                 distance_matrix = googlemap_client.distance_matrix(in_user_address, out_user_address)
                 distance_value = distance_matrix['rows'][0]['elements'][0]['distance']['text']
-            except :
+            except:
                 distance_value = 'Not Available'
 
             out_offer.distance = distance_value
@@ -419,3 +418,34 @@ class MatchedItemView(View):
 
     def get(self, request, *args, **kwargs):
         return HttpResponse('this url does not accept GET request')
+
+
+class NeighborhoodView(View):
+
+    def get(self, request, *args, **kwargs):
+        context = {}
+
+        googlemap_client = googlemaps.Client('AIzaSyBWzBAHevgilfjYaEvt4LjhKI5eJWasEwk')
+        item_list = ItemModel.objects.exclude(user=request.user)
+
+        try:
+            user_address = "Singapore " + UserProfileInfo.objects.get(user=request.user).postal_code
+
+            for item in item_list:
+                item_address = "Singapore " + UserProfileInfo.objects.get(user=item.user).postal_code
+
+                distance_matrix = googlemap_client.distance_matrix(user_address, item_address)
+                distance_str = distance_matrix['rows'][0]['elements'][0]['distance']['text']
+                distance_value = distance_str.split()[0]
+
+                # .distance = distance_value
+
+            # context['incoming_offers'] = incoming_offers
+            # context['outgoing_offers'] = outgoing_offers
+            return render(request, 'mainApp/neighborhood.html', {})
+
+        except:
+            distance_value = 'Not Available'
+
+    def post(self, request, *args, **kwargs):
+        return render(request, 'mainApp/neighborhood.html', {})

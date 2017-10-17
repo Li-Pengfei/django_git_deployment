@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<div class="row" style="margin: 2rem">
+    <div class="col-3">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
+            <a class="nav-link active" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab"
+               aria-controls="v-pills-all" aria-expanded="true">All Items</a>
+            <a class="nav-link" id="v-pills-electronics-tab" data-toggle="pill" href="#v-pills-electronics" role="tab"
+               aria-controls="v-pills-electronics" aria-expanded="false">Electronics</a>
+            <a class="nav-link" id="v-pills-fashion-tab" data-toggle="pill" href="#v-pills-fashion" role="tab"
+               aria-controls="v-pills-fashion" aria-expanded="false">Fashion & Accessories</a>
+            <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+               aria-controls="v-pills-home" aria-expanded="false">Home & Appliances</a>
+            <a class="nav-link" id="v-pills-health-tab" data-toggle="pill" href="#v-pills-health" role="tab"
+               aria-controls="v-pills-health" aria-expanded="false">Health & Beauty</a>
+            <a class="nav-link" id="v-pills-baby-tab" data-toggle="pill" href="#v-pills-baby" role="tab"
+               aria-controls="v-pills-baby" aria-expanded="false">Baby & Toys</a>
+            <a class="nav-link" id="v-pills-sports-tab" data-toggle="pill" href="#v-pills-sports" role="tab"
+               aria-controls="v-pills-sports" aria-expanded="false">Sports & Outdoors</a>
+            <a class="nav-link" id="v-pills-grocery-tab" data-toggle="pill" href="#v-pills-grocery" role="tab"
+               aria-controls="v-pills-grocery" aria-expanded="false">Groceries, Pets and Motors</a>
+            <a class="nav-link" id="v-pills-others-tab" data-toggle="pill" href="#v-pills-others" role="tab"
+               aria-controls="v-pills-others" aria-expanded="false">Others</a>
+        </div>
+    </div>
+    <div class="col-9">
+        <div class="neighbor-near-filter">
+            <p>Distance Near:</p>
+            {% include 'mainApp/pill_tab_content.html' %}
+        </div>
+        <div class="neighbor-middle-filter">
+            <p>Distance Middle:</p>
+            {% include 'mainApp/pill_tab_content.html' %}
+        </div>
+        <div class="neighbor-far-filter">
+            <p>Distance Far:</p>
+            {% include 'mainApp/pill_tab_content.html' %}
+        </div>
+    </div>
+</div>
