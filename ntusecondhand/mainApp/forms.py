@@ -21,5 +21,5 @@ class UserProfileInfoForm(forms.ModelForm):
 class AddItemModelForm(forms.ModelForm):
     class Meta:
         model = ItemModel
-        fields = ['category', 'title', 'description', 'condition','estimate_price', 'exchange_address', 'item_pic']
+        fields = ['category', 'title', 'description', 'estimate_price', 'exchange_address', 'item_pic']
 

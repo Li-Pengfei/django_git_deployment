@@ -1,4 +1,3 @@
-import googlemaps
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -8,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import View, TemplateView
 
 from mainApp.forms import UserForm, UserProfileInfoForm, AddItemModelForm
-from mainApp.models import ItemModel, UserProfileInfo, Offer
+from mainApp.models import ItemModel, UserProfileInfo
 
 
 # CBV : Class Based Views
@@ -206,77 +205,6 @@ class MakeOfferView(View):
         return HttpResponse('this url does not accept GET request')
 
 
-class AddOfferView(View):
-    def post(self, request, *args, **kwargs):
-
-        target_item = ItemModel.objects.get(pk=request.POST.get('target_item'))
-        offer_type = request.POST.get('offer_type')
-        offer_item = None
-        offer_status = 'ON'
-        if offer_type == 'EX':
-            offer_item = ItemModel.objects.get(pk=request.POST.get('offer_item'))
-            Offer.objects.create(initiator=offer_item, receiver=target_item, offer_type=offer_type,
-                                 offer_status=offer_status)
-        else:
-            Offer.objects.create(receiver=target_item, offer_type=offer_type, offer_status=offer_status)
-        return HttpResponseRedirect(reverse('mainApp:manage_my_offers'))
-
-    def get(self, request, *args, **kwargs):
-        return HttpResponse('this url does not accept GET request')
-
-
-class ManageMyOfferView(View):
-    def prepare_context(self, request):
-        context = {}
-
-        googlemap_client = googlemaps.Client('AIzaSyBWzBAHevgilfjYaEvt4LjhKI5eJWasEwk')
-        held_items = ItemModel.objects.filter(user=request.user)
-
-        incoming_offers = Offer.objects.filter(receiver__in=held_items)
-        outgoing_offers = Offer.objects.filter(initiator__in=held_items)
-
-        for in_offer in incoming_offers:
-            in_user_address = "Singapore " + UserProfileInfo.objects.get(user=in_offer.initiator.user).postal_code
-            out_user_address = "Singapore " + UserProfileInfo.objects.get(user=in_offer.receiver.user).postal_code
-            try:
-                distance_matrix = googlemap_client.distance_matrix(in_user_address, out_user_address)
-                distance_value = distance_matrix['rows'][0]['elements'][0]['distance']['text']
-            except:
-                distance_value = 'Not Available'
-
-            in_offer.distance = distance_value
-
-        for out_offer in outgoing_offers:
-            in_user_address = "Singapore " + UserProfileInfo.objects.get(user=out_offer.initiator.user).postal_code
-            out_user_address = "Singapore " + UserProfileInfo.objects.get(user=out_offer.receiver.user).postal_code
-
-            try:
-                distance_matrix = googlemap_client.distance_matrix(in_user_address, out_user_address)
-                distance_value = distance_matrix['rows'][0]['elements'][0]['distance']['text']
-            except:
-                distance_value = 'Not Available'
-
-            out_offer.distance = distance_value
-
-        context['incoming_offers'] = incoming_offers
-        context['outgoing_offers'] = outgoing_offers
-        return context
-
-    def post(self, request, *args, **kwargs):
-
-        offer_id = request.POST.get('offer_id')
-        offer = Offer.objects.get(pk=offer_id)
-        offer.offer_status = request.POST.get('status')
-        offer.save()
-
-        context = self.prepare_context(request)
-        return render(request, 'mainApp/manage_offers.html', context=context)
-
-    def get(self, request, *args, **kwargs):
-        context = self.prepare_context(request)
-        return render(request, 'mainApp/manage_offers.html', context=context)
-
-
 class ManageMyItemView(TemplateView):
     template_name = 'mainApp/index.html'
 
@@ -418,34 +346,3 @@ class MatchedItemView(View):
 
     def get(self, request, *args, **kwargs):
         return HttpResponse('this url does not accept GET request')
-
-
-class NeighborhoodView(View):
-
-    def get(self, request, *args, **kwargs):
-        context = {}
-
-        googlemap_client = googlemaps.Client('AIzaSyBWzBAHevgilfjYaEvt4LjhKI5eJWasEwk')
-        item_list = ItemModel.objects.exclude(user=request.user)
-
-        try:
-            user_address = "Singapore " + UserProfileInfo.objects.get(user=request.user).postal_code
-
-            for item in item_list:
-                item_address = "Singapore " + UserProfileInfo.objects.get(user=item.user).postal_code
-
-                distance_matrix = googlemap_client.distance_matrix(user_address, item_address)
-                distance_str = distance_matrix['rows'][0]['elements'][0]['distance']['text']
-                distance_value = distance_str.split()[0]
-
-                # .distance = distance_value
-
-            # context['incoming_offers'] = incoming_offers
-            # context['outgoing_offers'] = outgoing_offers
-            return render(request, 'mainApp/neighborhood.html', {})
-
-        except:
-            distance_value = 'Not Available'
-
-    def post(self, request, *args, **kwargs):
-        return render(request, 'mainApp/neighborhood.html', {})
