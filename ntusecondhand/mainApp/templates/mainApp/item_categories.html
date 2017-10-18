@@ -1,0 +1,64 @@
+<div class="row" style="margin: 2rem">
+    <div class="col-3">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
+            <a class="nav-link active" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab" aria-controls="v-pills-all" aria-expanded="true">All Items</a>
+            <a class="nav-link" id="v-pills-electronics-tab" data-toggle="pill" href="#v-pills-electronics" role="tab" aria-controls="v-pills-electronics" aria-expanded="false">Electronics</a>
+            <a class="nav-link" id="v-pills-fashion-tab" data-toggle="pill" href="#v-pills-fashion" role="tab" aria-controls="v-pills-fashion" aria-expanded="false">Fashion & Accessories</a>
+            <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-expanded="false">Home & Appliances</a>
+            <a class="nav-link" id="v-pills-health-tab" data-toggle="pill" href="#v-pills-health" role="tab" aria-controls="v-pills-health" aria-expanded="false">Health & Beauty</a>
+            <a class="nav-link" id="v-pills-baby-tab" data-toggle="pill" href="#v-pills-baby" role="tab" aria-controls="v-pills-baby" aria-expanded="false">Baby & Toys</a>
+            <a class="nav-link" id="v-pills-sports-tab" data-toggle="pill" href="#v-pills-sports" role="tab" aria-controls="v-pills-sports" aria-expanded="false">Sports & Outdoors</a>
+            <a class="nav-link" id="v-pills-grocery-tab" data-toggle="pill" href="#v-pills-grocery" role="tab" aria-controls="v-pills-grocery" aria-expanded="false">Groceries, Pets and Motors</a>
+            <a class="nav-link" id="v-pills-others-tab" data-toggle="pill" href="#v-pills-others" role="tab" aria-controls="v-pills-others" aria-expanded="false">Others</a>
+        </div>
+    </div>
+    <div class="col-9">
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade active show masonry-container" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab" aria-expanded="true">
+                {% for user_item in all_item_list %}
+                    {% include 'mainapp/masonry_item.html' %}
+                {% endfor %}
+            </div>
+            <div class="tab-pane fade masonry-container" id="v-pills-electronics" role="tabpanel" aria-labelledby="v-pills-electronics-tab" aria-expanded="false">
+                {% for user_item in elec_item_list %}
+                    {% include 'mainapp/masonry_item.html' %}
+                {% endfor %}
+            </div>
+            <div class="tab-pane fade masonry-container" id="v-pills-fashion" role="tabpanel" aria-labelledby="v-pills-fashion-tab" aria-expanded="false">
+                {% for user_item in fash_item_list %}
+                    {% include 'mainapp/masonry_item.html' %}
+                {% endfor %}
+            </div>
+            <div class="tab-pane fade masonry-container" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" aria-expanded="false">
+                {% for user_item in home_item_list %}
+                    {% include 'mainapp/masonry_item.html' %}
+                {% endfor %}
+            </div>
+            <div class="tab-pane fade masonry-container" id="v-pills-health" role="tabpanel" aria-labelledby="v-pills-health-tab" aria-expanded="false">
+                {% for user_item in heal_item_list %}
+                    {% include 'mainapp/masonry_item.html' %}
+                {% endfor %}
+            </div>
+            <div class="tab-pane fade masonry-container" id="v-pills-baby" role="tabpanel" aria-labelledby="v-pills-baby-tab" aria-expanded="false">
+                {% for user_item in baby_item_list %}
+                    {% include 'mainapp/masonry_item.html' %}
+                {% endfor %}
+            </div>
+            <div class="tab-pane fade masonry-container" id="v-pills-sports" role="tabpanel" aria-labelledby="v-pills-sports-tab" aria-expanded="false">
+                {% for user_item in spor_item_list %}
+                    {% include 'mainapp/masonry_item.html' %}
+                {% endfor %}
+            </div>
+            <div class="tab-pane fade masonry-container" id="v-pills-grocery" role="tabpanel" aria-labelledby="v-pills-grocery-tab" aria-expanded="false">
+                {% for user_item in groc_item_list %}
+                    {% include 'mainapp/masonry_item.html' %}
+                {% endfor %}
+            </div>
+            <div class="tab-pane fade masonry-container" id="v-pills-others" role="tabpanel" aria-labelledby="v-pills-others-tab" aria-expanded="false">
+                {% for user_item in othe_item_list %}
+                    {% include 'mainapp/masonry_item.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
