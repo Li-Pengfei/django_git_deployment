@@ -34,7 +34,6 @@
 </head>
 <body>
 
-
 <!-- Header -->
 <header>
     <div class="sticky-nav">
@@ -51,7 +50,7 @@
                 {% endif %}
                 <li><a href="{% url 'index' %}#work">Browse</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'mainApp:addItem' %}">Exchange Your Item</a></li>
+                    <li><a href="{% url 'mainApp:addItem' %}">Add Item</a></li>
                     <li><a href="{% url 'mainApp:manage_my_items' %}">Manage My Listings</a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}

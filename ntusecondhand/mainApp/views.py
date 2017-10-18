@@ -268,3 +268,5 @@ class AddItemView(View):
         })
 
 
+def ItemDetailView(request, item_id):
+    return render(request, 'mainApp/item_detail.html', {})
