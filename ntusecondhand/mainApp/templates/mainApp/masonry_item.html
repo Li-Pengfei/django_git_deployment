@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <div class="masonry-item">
-    <img class="masonry-img-thumb" src="{{ user_item.item_pic }}" alt="{{ user_item.item_pic }}">
+    <a href="/mainApp/{{ user_item.id }}/"><img class="masonry-img-thumb" src="{{ user_item.item_pic }}" alt="{{ user_item.item_pic }}"></a>
     <p class="masonry-item-title"><strong>{{ user_item.title }}</strong></p>
     <p class="masonry-item-price">
         <img class="masonry-detail-icon" src="{% static 'img/price_icon.png' %}" alt="Price Icon"> :
